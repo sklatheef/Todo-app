@@ -30,3 +30,16 @@ python manage.py migrate
 4. Start the server
 
 python manage.py runserver
+
+
+django-todo-app
+│
+├── app
+├── static
+├── templates
+├── todo_app
+├── screenshots
+├── manage.py
+├── requirements.txt
+├── README.md
+└── .gitignore
