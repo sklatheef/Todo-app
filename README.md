@@ -2,6 +2,20 @@
 
 A task management web application built using Django. It allows users to create tasks, toggle completion status, delete tasks, and restore deleted tasks from history.
 
+## Screenshots
+
+### Home Page
+![Home Page](screenshots/home.jpeg)
+
+### Tasks Page
+![Tasks Page](screenshots/tasks.jpeg)
+
+### History Page
+![History Page](screenshots/history.jpeg)
+
+### About Page
+![About Page](screenshots/about.jpeg)
+
 ## Features
 - Create tasks with descriptions
 - Toggle task completion status
@@ -32,13 +46,18 @@ python manage.py migrate
 python manage.py runserver
 
 
-django-todo-app
+todo_app
 │
 ├── app
 ├── static
 ├── templates
 ├── todo_app
 ├── screenshots
+│   ├── about.jpeg
+│   ├── history.jpeg
+│   ├── home.jpeg
+│   └── tasks.jpeg
+│
 ├── manage.py
 ├── requirements.txt
 ├── README.md
