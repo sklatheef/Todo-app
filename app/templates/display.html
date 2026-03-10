@@ -1,0 +1,107 @@
+{% extends 'main.html' %}
+
+{% block content %}
+<style>
+   
+    .glass-section {
+        margin: 40px auto;
+        padding: 20px;
+        max-width: 90%;
+        background: rgba(255, 255, 255, 0.1); /* Transparent white */
+        backdrop-filter: blur(10px); /* The "Glass" blur effect */
+        -webkit-backdrop-filter: blur(10px);
+        border-radius: 15px;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+        color: #fff; /* White text looks best on glass */
+    }
+
+    .glass-table {
+        width: 100%;
+        border-collapse: collapse;
+        text-align: left;
+    }
+
+    .glass-table th {
+        background: rgba(255, 255, 255, 0.2);
+        padding: 15px;
+        text-transform: uppercase;
+        font-size: 0.85rem;
+        letter-spacing: 1px;
+    }
+
+    .glass-table td {
+        padding: 15px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .glass-table tbody tr:hover {
+        background: rgba(255, 255, 255, 0.1);
+    }
+
+    /* Action Links */
+    .action-links a {
+        color: #00d4ff;
+        text-decoration: none;
+        font-weight: bold;
+        margin: 0 5px;
+    }
+
+    .action-links a:hover {
+        text-decoration: underline;
+    }
+
+    .delete-link {
+        color: #ff4d4d !important;
+    }
+
+    /* Status Indicators */
+    .status-text {
+        font-weight: bold;
+        padding: 4px 8px;
+        border-radius: 5px;
+        background: rgba(255, 255, 255, 0.1);
+    }
+</style>
+
+<section class="glass-section">
+    <h2 style="margin-bottom: 20px;">Active Tasks</h2>
+    <table class="glass-table">
+        <thead>
+            <tr>
+                <th>Task</th>
+                <th>Status</th>
+                <th>Created</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for i in data %}
+            <tr>
+                <td>{{ i.task }}</td>
+                <td>
+                    <span class="status-text">
+                        {% if i.status %} ✅ Completed {% else %} ⏳ Pending {% endif %}
+                    </span>
+                </td>
+                <td>{{ i.created_at|date:"d M Y" }}</td>
+                <td class="action-links">
+                    <a href="{% url 'single' i.id %}">View</a> |
+                    <a href="{% url 'edit_task' i.id %}">Edit</a> |
+                    <a href="{% url 'toggle_status' i.id %}">
+                        {% if i.status %}Undo{% else %}Done{% endif %}
+                    </a> |
+                    <a href="{% url 'delete_task' i.id %}" class="delete-link" onclick="return confirm('Move to history?')">Delete</a>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="4" style="text-align:center; padding:30px;">
+                    No active tasks found.
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</section>
+{% endblock %}

@@ -1,0 +1,57 @@
+{% extends 'main.html' %}
+
+{% block content %}
+<style>
+    .glass-card {
+        margin: 50px auto;
+        padding: 40px;
+        max-width: 600px;
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(15px);
+        -webkit-backdrop-filter: blur(15px);
+        border-radius: 20px;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        color: white;
+    }
+
+    .glass-card h1 { color: #00d4ff; margin-bottom: 10px; }
+    .status-badge {
+        display: inline-block;
+        padding: 5px 12px;
+        border-radius: 50px;
+        font-size: 0.8rem;
+        background: rgba(255, 255, 255, 0.1);
+        margin-bottom: 20px;
+    }
+
+    .desc-box {
+        background: rgba(0, 0, 0, 0.2);
+        padding: 20px;
+        border-radius: 10px;
+        min-height: 100px;
+        line-height: 1.6;
+    }
+
+    .btn-group { margin-top: 30px; display: flex; gap: 15px; }
+    .btn { text-decoration: none; font-weight: bold; color: white; transition: 0.3s; }
+    .btn-back { opacity: 0.7; }
+    .btn-edit { color: #00d4ff; }
+</style>
+
+<div class="glass-card">
+    <span class="status-badge">
+        {% if task.status %} ✅ Completed {% else %} ⏳ Pending {% endif %}
+    </span>
+    <h1>{{ task.task }}</h1>
+    <p style="opacity: 0.6; font-size: 0.85rem;">Created: {{ task.created_at|date:"d M Y" }}</p>
+    
+    <div class="desc-box">
+        {{ task.desc }}
+    </div>
+
+    <div class="btn-group">
+        <a href="{% url 'display' %}" class="btn btn-back">← Back to List</a>
+        <a href="{% url 'edit_task' task.id %}" class="btn btn-edit">Edit Task</a>
+    </div>
+</div>
+{% endblock %}

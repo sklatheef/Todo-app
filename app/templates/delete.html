@@ -1,0 +1,71 @@
+{% extends 'main.html' %}
+
+{% block content %}
+<style>
+    .glass-card {
+        margin: 100px auto;
+        padding: 40px;
+        max-width: 500px;
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(15px);
+        -webkit-backdrop-filter: blur(15px);
+        border-radius: 20px;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        text-align: center;
+        color: white;
+    }
+
+    .warning-icon {
+        font-size: 3rem;
+        color: #ff4d4d;
+        margin-bottom: 20px;
+    }
+
+    .btn-group {
+        margin-top: 30px;
+        display: flex;
+        justify-content: center;
+        gap: 15px;
+    }
+
+    .btn {
+        padding: 10px 25px;
+        border-radius: 8px;
+        text-decoration: none;
+        font-weight: bold;
+        transition: 0.3s;
+    }
+
+    .btn-confirm {
+        background: #ff4d4d;
+        color: white;
+        border: none;
+        cursor: pointer;
+    }
+
+    .btn-cancel {
+        background: rgba(255, 255, 255, 0.2);
+        color: white;
+        border: 1px solid rgba(255, 255, 255, 0.3);
+    }
+
+    .btn:hover {
+        transform: scale(1.05);
+        opacity: 0.9;
+    }
+</style>
+
+<div class="glass-card">
+    <div class="warning-icon">⚠️</div>
+    <h2>Are you sure?</h2>
+    <p>You are about to move <strong>"{{ task.task }}"</strong> to the history archive.</p>
+    
+    <form method="POST">
+        {% csrf_token %}
+        <div class="btn-group">
+            <a href="{% url 'display' %}" class="btn btn-cancel">No, Go Back</a>
+            <button type="submit" class="btn btn-confirm">Yes, Delete Task</button>
+        </div>
+    </form>
+</div>
+{% endblock %}

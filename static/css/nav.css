@@ -1,0 +1,16 @@
+
+nav {
+    background: rgba(255, 255, 255, 0.05) !important;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem 5%;
+}
+
+nav ul li a {
+    color: white !important;
+    text-decoration: none;
+    opacity: 0.8;
+}

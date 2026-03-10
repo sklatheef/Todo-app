@@ -1,0 +1,68 @@
+{% extends 'main.html' %}
+
+{% block content %}
+<style>
+    .glass-section {
+        margin: 40px auto;
+        padding: 20px;
+        background: rgba(255, 255, 255, 0.05);
+        backdrop-filter: blur(10px);
+        border-radius: 15px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        color: #fff;
+    }
+
+    .glass-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+    }
+
+    .glass-table th {
+        text-align: left;
+        padding: 15px;
+        background: rgba(255, 255, 255, 0.1);
+    }
+
+    .glass-table td {
+        padding: 15px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .restore-link {
+        color: #28a745;
+        text-decoration: none;
+        font-weight: bold;
+    }
+
+    .restore-link:hover { text-decoration: underline; }
+</style>
+
+<section class="glass-section">
+    <h2>Task History (Deleted Tasks)</h2>
+    <table class="glass-table">
+        <thead>
+            <tr>
+                <th>Task Name</th>
+                <th>Deleted On</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for i in data %}
+            <tr>
+                <td>{{ i.task }}</td>
+                <td>{{ i.deleted_at|date:"d M Y | H:i" }}</td>
+                <td>
+                    <a href="{% url 'restore_task' i.id %}" class="restore-link">Restore to Active</a>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="3" style="text-align:center; padding:30px;">History is empty.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</section>
+{% endblock %}
